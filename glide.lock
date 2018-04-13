@@ -1,0 +1,8 @@
+hash: 175611b6c31799c686411d7318eace5f9c51aa321f41d27e5a17b6b13f4d88fc
+updated: 2018-04-13T12:50:44.943368206+01:00
+imports:
+- name: github.com/op/go-logging
+  version: b2cb9fa56473e98db8caba80237377e83fe44db5
+- name: gopkg.in/yaml.v2
+  version: 5420a8b6744d3b0345ab293f6fcba19c978f1183
+testImports: []
