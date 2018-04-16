@@ -15,7 +15,7 @@ func (p Redactable) Redacted() interface{} {
 }
 
 // New returns a new Logger instance
-func New() *logging.Logger {
+func New(verbose bool) *logging.Logger {
 	logger := logging.MustGetLogger("server")
 
 	format := logging.MustStringFormatter(
@@ -25,7 +25,14 @@ func New() *logging.Logger {
 	stderr := logging.NewLogBackend(os.Stderr, "", 0)
 	stderrFormatted := logging.NewBackendFormatter(stderr, format)
 
-	logging.SetBackend(stderrFormatted)
+	stderrFormattedLeveled := logging.AddModuleLevel(stderrFormatted)
+	if verbose {
+		stderrFormattedLeveled.SetLevel(logging.DEBUG, "")
+	} else {
+		stderrFormattedLeveled.SetLevel(logging.WARNING, "")
+	}
+
+	logging.SetBackend(stderrFormattedLeveled)
 
 	return logger
 }
