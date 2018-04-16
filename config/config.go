@@ -30,8 +30,11 @@ func getDecoder(r io.Reader, ext string) decoder {
 }
 
 // Load reads the file and returns the config instance
-func Load(file string) (Config, error) {
+func Load(file string, defaults map[string]interface{}) (Config, error) {
 	cfg := make(Config, 0)
+	for k, v := range defaults {
+		cfg[k] = v
+	}
 
 	var ext string
 	if dot := strings.LastIndex(file, "."); dot != -1 {
